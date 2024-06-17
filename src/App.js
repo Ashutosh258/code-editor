@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HomeScreen } from "./screens/homeScreen/index.js";
+import { PlaygroundScreen } from "./screens/playgroundScreen/index.js";
+import { PlaygroundProvider } from "./Providers/PlaygroundProvider.js";
+import { ModalProvider } from "./Providers/ModalProvider.js";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <PlaygroundProvider>
+      <ModalProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomeScreen />} />
+          <Route path="/playground" element={<PlaygroundScreen />} />
+        </Routes>
+      </BrowserRouter>
+      </ModalProvider>
+    </PlaygroundProvider>
   );
 }
 
