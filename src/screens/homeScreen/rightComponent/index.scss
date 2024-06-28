@@ -1,6 +1,10 @@
 .right-container{
+    // height: 100vh;
+    scrollbar-width: thin;
+    overflow-y: scroll;
     padding: 20px;
     .header{
+        // position: fixed;
         display: flex;
         justify-content: space-between;
         padding: 10px 0;

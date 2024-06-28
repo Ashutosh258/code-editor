@@ -1,14 +1,14 @@
 import { RightComponent } from "./rightComponent";
 import "./index.scss"
-import { Modal } from "../../Providers/modals/Modal";
+import{Modal} from "../../Providers/modals/Modal"
 import { useContext } from "react";
-import { ModalContext } from "../../Providers/ModalProvider";
+import { ModalContext, modalConstants } from "../../Providers/ModalProvider";
 
 export const HomeScreen = () => {
 
     const modalFeatures =useContext(ModalContext)
     const openCreatePlaygroundModal= ()=>{
-        modalFeatures.openModal("CREATE_PLAYGROUND");
+        modalFeatures.openModal(modalConstants.CREATE_PLAYGROUND);
     };
     
     return (

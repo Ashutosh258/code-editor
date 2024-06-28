@@ -1,0 +1,68 @@
+.playground-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+        .icon-container{
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            justify-content: center;
+        }
+        .content-container{
+            flex-grow: 1;
+            display: grid;
+            gap: 10px;
+            background-color: #1E1E1E;
+            padding: 6px;
+            background-color: #3e2f48;
+            grid-template-columns:3fr 2fr;
+        }
+    .header-container{
+        background-color:#1E1E1E ;
+        display: flex;
+        // justify-content: center;
+        padding: 6px 12px;
+    }
+    .editor-container{
+        grid-row: 1/3;
+    }
+    .input-output-container{
+        color: white;
+        display: flex;
+        background-color: rgb(38,38,38);
+        flex-direction: column;
+        border-radius: 10px;
+        .input-header{
+            border-radius: 10px 0 0;
+            background-color: rgb(51,51,51); 
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        textarea{
+            color: white;
+            
+            border-radius: 0 10px;
+            flex-grow: 1;
+            resize: none ;
+            border: none;
+            background-color: rgb(38,38,38);
+        }
+        textarea::selection{
+            color:black;
+            background-color: #fff;
+        }
+        textarea:focus{
+            outline: none;
+            font-size:x-large;
+        }
+        button{
+            color: white;
+            border: none;
+            background-color: rgb(51,51,51);
+            font-size: 0.90rem;
+        }
+    }
+    
+
+}

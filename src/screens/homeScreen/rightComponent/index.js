@@ -1,8 +1,25 @@
 import { useContext } from "react";
 import "./index.scss";
 import { PlaygroundContext } from "../../../Providers/PlaygroundProvider";
+import { ModalContext, modalConstants } from "../../../Providers/ModalProvider";
+import { useNavigate } from "react-router-dom";
 
-const Folder = ({ folderTitle, cards }) => {
+const Folder = ({ folderTitle, cards, folderId }) => {
+  const { deleteFolder, deleteFile } = useContext(PlaygroundContext);
+  const { openModal, setModalPayload } = useContext(ModalContext);
+  const navigate = useNavigate();
+
+  const onDeleteFolder = () => {
+    deleteFolder(folderId);
+  };
+  const onEditFolderTitle = () => {
+    setModalPayload(folderId);
+    openModal(modalConstants.UPDATE_FOLDER_TITLE);
+  };
+  const openCreateCardModal = () => {
+    setModalPayload(folderId);
+    openModal(modalConstants.CREATE_CARD);
+  };
   return (
     <div className="folder-container">
       <div className="folder-header">
@@ -13,35 +30,69 @@ const Folder = ({ folderTitle, cards }) => {
           <span>{folderTitle}</span>
         </div>
         <div className="folder-header-items">
-          <span className="material-icons">delete</span>
-          <span className="material-icons">edit</span>
-          <button>
+          <span onClick={onDeleteFolder} className="material-icons">
+            delete
+          </span>
+          <span onClick={onEditFolderTitle} className="material-icons">
+            edit
+          </span>
+          <button onClick={openCreateCardModal}>
             <span className="material-icons">add</span>
             <span>New Playground</span>
           </button>
         </div>
       </div>
       <div className="cards-container">
-        {cards?.map((files, index) => (
-          <div className="cards" key={index}>
-            <img src="logo.png" alt="logo" />
-            <div className="title-container">
-              <span>{files?.titles}</span>
-              <span>Language: {files?.language}</span>
+        {cards?.map((files, index) => {
+          const onEditFile = () => {
+            setModalPayload({ fileId: files.id, folderId: folderId });
+            openModal(modalConstants.UPDATE_FILE_TITLE);
+          };
+          const onDeleteFile = () => {
+            //deleteFile
+            deleteFile(folderId, files.id);
+          };
+
+
+          const navigateToPlaygroundScreen = () => {
+            //TODO navigate to playground screen
+            navigate(`/playground/${files.id}/${folderId}`);
+          };
+
+          return (
+            <div
+              onClick={navigateToPlaygroundScreen}
+              className="cards"
+              key={index}
+            >
+              <img src="logo.png" alt="logo" />
+              <div className="title-container">
+                <span>{files?.titles}</span>
+                <span>Language: {files?.language}</span>
+              </div>
+              <div style={{ display: "flex", gap: "10px" }}>
+                <span onClick={onDeleteFile} className="material-icons">
+                  delete
+                </span>
+                <span onClick={onEditFile} className="material-icons">
+                  edit
+                </span>
+              </div>
             </div>
-            <div style={{ display: "flex", gap: "10px" }}>
-              <span className="material-icons">delete</span>
-              <span className="material-icons">edit</span>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
 };
 
 export const RightComponent = () => {
-  const {folders} = useContext(PlaygroundContext);
+  const { folders } = useContext(PlaygroundContext);
+  const modalFeatures = useContext(ModalContext);
+
+  const openCreateNewFolderModal = () => {
+    modalFeatures.openModal(modalConstants.CREATE_FOLDER);
+  };
 
   return (
     <div className="right-container">
@@ -49,13 +100,18 @@ export const RightComponent = () => {
         <div className="title">
           <span>My </span>Playground
         </div>
-        <button className="add-folder">
+        <button onClick={openCreateNewFolderModal} className="add-folder">
           <span className="material-icons">add</span>
           <span>New Folder</span>
         </button>
       </div>
       {folders?.map((folder, index) => (
-        <Folder key={index} folderTitle={folder?.titles} cards={folder?.files} />
+        <Folder
+          key={index}
+          folderTitle={folder?.titles}
+          cards={folder?.files}
+          folderId={folder.id}
+        />
       ))}
     </div>
   );
