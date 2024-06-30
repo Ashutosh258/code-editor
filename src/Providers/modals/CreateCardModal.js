@@ -32,9 +32,9 @@ export const CreatecardModal  =()=>{
             <div className="item">
                 <select name="language" required>
                     <option value="cpp">CPP</option>
-                    <option value="python">Java</option>
-                    <option value="javascript">Python</option>
-                    <option value="python">JavaScript</option>
+                    <option value="java">Java</option>
+                    <option value="python">Python</option>
+                    <option value="Javascript">JavaScript</option>
                 </select>
                 <button type="submit">
                     Create Playground

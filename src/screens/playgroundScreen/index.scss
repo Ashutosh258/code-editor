@@ -63,6 +63,37 @@
             font-size: 0.90rem;
         }
     }
+    .fullpage-loader{
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(62, 58, 58, 0.167);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .loader{
+           width: 40px;
+           height: 40px;
+           background-color: transparent;
+           border: 8px solid rgb(240, 25, 25);
+           border-radius: 50%;
+           // border-left-color: whitesmoke;
+           border-right-color: rgb(106, 106, 212);
+           animation: 0.8s loader infinite linear;
+        }
+   }
     
 
+}
+
+@keyframes loader{
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
 }

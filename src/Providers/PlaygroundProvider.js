@@ -163,6 +163,62 @@ export const PlaygroundProvider = ({ children }) => {
     setFolders(copiedFolders);
   }
 
+  const getDefaultCode=(fileId,folderId)=>{
+      for(let i=0; i<folders.length; i++){
+        if(folders[i].id === folderId){
+          for(let j=0; j<folders[i].files.length; j++){
+            if(folders[i].files[j].id === fileId){
+              return folders[i].files[j].code;
+            }
+          }
+        }
+      }
+  }
+
+  const getLanguage=(fileId,folderId)=>{
+    for(let i=0; i<folders.length; i++){
+      if(folders[i].id === folderId){
+        for(let j=0; j<folders[i].files.length; j++){
+          if(folders[i].files[j].id === fileId){
+            return folders[i].files[j].language;
+          }
+        }
+      }
+    }
+}
+
+  const updateLanguage=(fileId,folderId,language)=>{
+    const newFolders=[...folders]
+    for(let i=0; i<newFolders.length; i++){
+      if(newFolders[i].id === folderId){
+        for(let j=0; j<newFolders[i].files.length; j++){
+          if(newFolders[i].files[j].id === fileId){
+              newFolders[i].files[j].language=language;
+              newFolders[i].files[j].code=defaultCodes[language];
+          }
+        }
+      }
+    }
+    localStorage.setItem('data', JSON.stringify(newFolders));
+    setFolders(newFolders);
+  }
+
+  const saveCode=(newCode, fileId, folderId)=>{
+    const newFolders=[...folders]
+    for(let i=0; i<newFolders.length; i++){
+      if(newFolders[i].id === folderId){
+        for(let j=0; j<newFolders[i].files.length; j++){
+          if(newFolders[i].files[j].id === fileId){
+              newFolders[i].files[j].code=newCode;
+          }
+        }
+      }
+    }
+    localStorage.setItem('data', JSON.stringify(newFolders));
+    setFolders(newFolders);
+  }
+
+
 
   useEffect(() => {
     if(!localStorage.getItem("data")){
@@ -179,6 +235,10 @@ export const PlaygroundProvider = ({ children }) => {
     editFileTitle,
     deleteFile,
     createPlayground,
+    getDefaultCode,
+    getLanguage,
+    updateLanguage,
+    saveCode,
   };
   return (
     <PlaygroundContext.Provider value={playgroundFeatures}>

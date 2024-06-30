@@ -16,7 +16,8 @@ const Folder = ({ folderTitle, cards, folderId }) => {
     setModalPayload(folderId);
     openModal(modalConstants.UPDATE_FOLDER_TITLE);
   };
-  const openCreateCardModal = () => {
+  const openCreateCardModal = (e) => {
+    e.stopPropagation();
     setModalPayload(folderId);
     openModal(modalConstants.CREATE_CARD);
   };
@@ -44,12 +45,14 @@ const Folder = ({ folderTitle, cards, folderId }) => {
       </div>
       <div className="cards-container">
         {cards?.map((files, index) => {
-          const onEditFile = () => {
+          const onEditFile = (e) => {
+            e.stopPropagation();
             setModalPayload({ fileId: files.id, folderId: folderId });
             openModal(modalConstants.UPDATE_FILE_TITLE);
           };
-          const onDeleteFile = () => {
+          const onDeleteFile = (e) => {
             //deleteFile
+            e.stopPropagation();
             deleteFile(folderId, files.id);
           };
 
