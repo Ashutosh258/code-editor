@@ -38,7 +38,7 @@ export async function makeSubmission({ code, language, callback, stdin }) {
   const url =
     "https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=true&wait=false&fields=*";
 
-  const Options = {
+   const Options = {
     method: "POST",
     headers: {
       "x-rapidapi-key": key,
