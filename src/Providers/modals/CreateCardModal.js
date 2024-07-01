@@ -1,4 +1,4 @@
-import "./CreatePlaygroundModal.scss"
+import "./createPlaygroundModal.scss"
 import { v4 } from "uuid";
 import {ModalContext} from"../ModalProvider"
 import { PlaygroundContext, defaultCodes } from "../PlaygroundProvider";

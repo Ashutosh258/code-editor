@@ -4,7 +4,7 @@ import { useContext } from "react"
 import { ModalContext } from "../ModalProvider"; 
 import { PlaygroundContext } from "../PlaygroundProvider";
 import "./CreateFolderModal.scss"
-import "./CreatePlaygroundModal.scss"
+import "./createPlaygroundModal.scss"
 
 export const CreateFolderModal = ()=>{
 

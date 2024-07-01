@@ -1,4 +1,4 @@
-import "./CreatePlaygroundModal.scss"
+import "./createPlaygroundModal.scss"
 import { useContext } from "react";
 import { ModalContext } from "../ModalProvider";
 import { PlaygroundContext} from "../PlaygroundProvider";
